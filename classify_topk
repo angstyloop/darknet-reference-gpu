@@ -5,7 +5,7 @@ if [ ! $DARKNET_DATA ] || [ ! $DARKNET_CFG ] || [ ! $DARKNET_WEIGHTS ]; then
 fi
 
 if [ ! $1 ]; then
-    echo 'specify the top predicting object class'
+    echo 'specify the number of object classes to predict'
     exit 1
 fi
 
@@ -21,6 +21,6 @@ while [ $2 ]; do
     shift
 done
 
-echo $COMMAND
+#echo $COMMAND
 
 eval $COMMAND

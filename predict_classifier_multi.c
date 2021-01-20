@@ -3,6 +3,8 @@
 
 void predict_classifier_multi(char *datacfg, char *cfgfile, char *weightfile, char **filenames, int n_files, int top) {
 
+    double time1 = what_time_is_it_now();
+
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
     srand(2222222);
@@ -18,12 +20,17 @@ void predict_classifier_multi(char *datacfg, char *cfgfile, char *weightfile, ch
     char buff[256];
     char *input = buff;
 
+    double time2 = what_time_is_it_now();
+
+    printf("Loaded network in %f seconds.\n", time2 - time1);
+
     for (int i=0; i<n_files; ++i) {
         char* filename = filenames[i];
         if(filename){
             strncpy(input, filename, 256);
             printf("%s\n", input);
             image im = load_image_color(input, 0, 0);
+            printf("%d x %d\n", im.w, im.h);
             image r = letterbox_image(im, net->w, net->h);
             float  *X = r.data;
             float *predictions = network_predict(net, X);
@@ -38,6 +45,9 @@ void predict_classifier_multi(char *datacfg, char *cfgfile, char *weightfile, ch
             free_image(im);
         }
     }
+    double time3 = what_time_is_it_now();
+
+    printf("Classified %d images in %f seconds.\n", n_files, time3 - time2);
 }
 
 /* drives classification */

@@ -1,0 +1,5 @@
+2019 Macbook Pro
+2.6 GHz 6-Core Intel Core i7
+16 GB 2400 MHz DDR4
+Loaded network in 0.215683 seconds.
+Classified 2775 images in 414.576312 seconds.
